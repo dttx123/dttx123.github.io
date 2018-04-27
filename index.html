@@ -1,99 +1,180 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>普通地图&全景图</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oxVPsK6Gmi7Vr4TkweDKIhTegCeMu2aQ"></script>
-    <style type="text/css">
-        body, html{width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-        #panorama {height: 50%;overflow: hidden;}
-        #normal_map {height:50%;overflow: hidden;}
-    </style>
-
-    <script language="javascript" type="text/javascript" src="35ff706fd57d11c141cdefcd58d6562b.js" charset="gb2312"></script><script type="text/javascript">
-    hQGHuMEAyLn('[id="bb9c190068b84055"]');</script></head>
-<body>
-<div id="panorama"></div>
-<div id="normal_map"></div>
-<script src="jquery.min.js"></script>
-<script type="text/javascript">
-
-    //1-使用H5的API获取用户的经纬度 GPS定位
-    //2-把GPS坐标转成百度经纬度
-    //3-使用百度地图进行显示
-
-    //1-使用H5的API获取用户的经纬度 GPS定位
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(function(position){ //获取位置成功的回调
-            var jd=position.coords.longitude; //经度
-            var wd=position.coords.latitude;  //纬度
-            //2-把GPS坐标转成百度经纬度
-            //http://api.map.baidu.com/geoconv/v1/?coords=114.21892734521,29.575429778924&from=1&to=5&ak=你的密钥 //GET请求
-            $.ajax({
-                type:'get',
-                url:'http://api.map.baidu.com/geoconv/v1/',
-                data:{
-                    ak:'oxVPsK6Gmi7Vr4TkweDKIhTegCeMu2aQ',
-                    coords:jd+','+wd,
-                    from:1,
-                    to:5
-                },
-                dataType:'jsonp',
-                success:function(info){
-                    console.log(info.result[0]);
-                    //转换后的准确的坐标坐标
-                    var x=info.result[0].x;
-                    var y=info.result[0].y;
-                    //交给地图显示
-                    setMap(x,y);
-                }
-            })
-
-
-        },function(error){ //获取位置失败的回调
-            console.log('定位失败！');
-
-        });
-
-    }else{
-        console.log('浏览器版本过低，去更新！');
-    }
-
-
-
-    //百度地图生成地图的方法
-    function setMap(x,y){
-        //全景图展示
-        var panorama = new BMap.Panorama('panorama');
-        panorama.setPosition(new BMap.Point(x, y)); //根据经纬度坐标展示全景图
-        panorama.setPov({heading: -40, pitch: 6});
-
-        panorama.addEventListener('position_changed', function(e){ //全景图位置改变后，普通地图中心点也随之改变
-            var pos = panorama.getPosition();
-            map.setCenter(new BMap.Point(pos.lng, pos.lat));
-            marker.setPosition(pos);
-        });
-        //普通地图展示
-        var mapOption = {
-            mapType: BMAP_NORMAL_MAP,
-            maxZoom: 18,
-            drawMargin:0,
-            enableFulltimeSpotClick: true,
-            enableHighResolution:true
+    <meta charset="UTF-8">
+    <!--meta:vp-->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
         }
-        var map = new BMap.Map("normal_map", mapOption);
-        var testpoint = new BMap.Point(x, y);
-        map.centerAndZoom(testpoint, 18);
-        var marker=new BMap.Marker(testpoint);
-        marker.enableDragging();
-        map.addOverlay(marker);
-        marker.addEventListener('dragend',function(e){
-            panorama.setPosition(e.point); //拖动marker后，全景图位置也随着改变
-            panorama.setPov({heading: -40, pitch: 6});}
-        );
-    }
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        body{
+            background-color: #ccc;
+        }
+        .layout{
+            background-color: #fff;
+            /*width: 640px;*/
+            height: 1000px;
+            margin: 0 auto;
+            max-width: 640px;
+            min-width: 320px;
+        }
+        .banner img{
+            width: 100%;
+        }
 
-</script>
+        .nav {
+            padding: 5px;
+        }
+
+        .item{
+            height: 90px;
+            border-radius: 10px;
+            background-color: crimson;
+            margin-bottom: 10px;
+            /*伸缩布局*/
+            display: flex;
+        }
+
+        .pub{
+            flex: 1;
+        }
+        .sub{
+            flex: 2;
+        }
+
+        .sub a{
+            float: left;
+            width: 50%;
+            height: 45px;
+            text-align: center;
+            line-height:45px;
+            border-left: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            /*采用内减模式*/
+            box-sizing: border-box;
+            color:#fff;
+        }
+
+        .sub a:nth-last-child(-n+2){
+            border-bottom:none;
+        }
+
+        .item:last-child a{
+            width: 33.33%;
+        }
+        
+        .item:nth-child(2) {
+            background-color: deepskyblue;
+        }
+
+        .item:nth-child(3) {
+            background-color: deeppink;
+        }
+
+        .item:nth-child(4) {
+            background-color: greenyellow;
+        }
+
+        /*拓展模块*/
+        .extra{
+            display: flex;
+        }
+        .extra a{
+            flex:1;
+        }
+
+        .extra a img{
+            width: 100%;
+        }
+
+        .f-nav{
+            list-style: none;
+            display: flex;
+            height: 40px;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            line-height: 40px;
+            color:#ccc;
+        }
+
+        .f-nav li{
+            flex: 1;
+            text-align: center;
+        }
+        p{
+            text-align: center;
+            color:#333;
+            line-height: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <!--布局的容器-->
+    <div class="layout">
+        <!--banner-->
+        <div class="banner">
+            <img src="images/banner3.jpg" alt="">
+        </div>
+        <!--nav-->
+        <nav class="nav">
+            <div class="item">
+                <div class="pub"></div>
+                <div class="sub">
+                    <a href="javascript:;">海外酒店</a>
+                    <a href="javascript:;">团购</a>
+                    <a href="javascript:;">特惠酒店</a>
+                    <a href="javascript:;">客栈公寓</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="pub"></div>
+                <div class="sub">
+                    <a href="javascript:;">火车票</a>
+                    <a href="javascript:;">汽车票船票</a>
+                    <a href="javascript:;">国际机票</a>
+                    <a href="javascript:;">自驾专车</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="pub"></div>
+                <div class="sub">
+                    <a href="javascript:;">攻略身边</a>
+                    <a href="javascript:;">邮轮</a>
+                    <a href="javascript:;">周末游</a>
+                    <a href="javascript:;">保险签证</a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="sub">
+                    <a href="javascript:;">门票玩乐</a>
+                    <a href="javascript:;">美食</a>
+                    <a href="javascript:;">全球购</a>
+                    <a href="javascript:;">礼品卡</a>
+                    <a href="javascript:;">出境WIFI</a>
+                    <a href="javascript:;">更多</a>
+                </div>
+            </div>
+        </nav>
+        <div class="extra">
+            <a href="#"><img src="images/extra_1.png" alt=""></a>
+            <a href="#"><img src="images/extra_2.png" alt=""></a>
+        </div>
+        <!--导航-->
+        <ul class="f-nav">
+            <li>我的</li>
+            <li>客户端</li>
+            <li>下载</li>
+        </ul>
+        <p>网站地图 | ENGLISH | 电脑版</p>
+        <p>©2015 携程旅行</p>
+    </div>
 </body>
 </html>
-
