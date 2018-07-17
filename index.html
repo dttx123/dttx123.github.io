@@ -1,180 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+<head lang="en">
     <meta charset="UTF-8">
-    <!--meta:vp-->
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Title</title>
+    <title></title>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        a {
-            text-decoration: none;
-            color: #333;
-        }
-        body{
-            background-color: #ccc;
-        }
-        .layout{
-            background-color: #fff;
-            /*width: 640px;*/
-            height: 1000px;
-            margin: 0 auto;
+        form{
+            width: 100%;
             max-width: 640px;
-            min-width: 320px;
+            margin:0 auto;
         }
-        .banner img{
+
+        input{
+            display: block;
             width: 100%;
-        }
-
-        .nav {
-            padding: 5px;
-        }
-
-        .item{
-            height: 90px;
-            border-radius: 10px;
-            background-color: crimson;
-            margin-bottom: 10px;
-            /*伸缩布局*/
-            display: flex;
-        }
-
-        .pub{
-            flex: 1;
-        }
-        .sub{
-            flex: 2;
-        }
-
-        .sub a{
-            float: left;
-            width: 50%;
-            height: 45px;
-            text-align: center;
-            line-height:45px;
-            border-left: 1px solid #fff;
-            border-bottom: 1px solid #fff;
-            /*采用内减模式*/
-            box-sizing: border-box;
-            color:#fff;
-        }
-
-        .sub a:nth-last-child(-n+2){
-            border-bottom:none;
-        }
-
-        .item:last-child a{
-            width: 33.33%;
-        }
-        
-        .item:nth-child(2) {
-            background-color: deepskyblue;
-        }
-
-        .item:nth-child(3) {
-            background-color: deeppink;
-        }
-
-        .item:nth-child(4) {
-            background-color: greenyellow;
-        }
-
-        /*拓展模块*/
-        .extra{
-            display: flex;
-        }
-        .extra a{
-            flex:1;
-        }
-
-        .extra a img{
-            width: 100%;
-        }
-
-        .f-nav{
-            list-style: none;
-            display: flex;
-            height: 40px;
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-            line-height: 40px;
-            color:#ccc;
-        }
-
-        .f-nav li{
-            flex: 1;
-            text-align: center;
-        }
-        p{
-            text-align: center;
-            color:#333;
-            line-height: 40px;
+            height: 25px;
+            margin-bottom:20px;
         }
 
     </style>
 </head>
 <body>
-    <!--布局的容器-->
-    <div class="layout">
-        <!--banner-->
-        <div class="banner">
-            <img src="images/banner3.jpg" alt="">
-        </div>
-        <!--nav-->
-        <nav class="nav">
-            <div class="item">
-                <div class="pub"></div>
-                <div class="sub">
-                    <a href="javascript:;">海外酒店</a>
-                    <a href="javascript:;">团购</a>
-                    <a href="javascript:;">特惠酒店</a>
-                    <a href="javascript:;">客栈公寓</a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="pub"></div>
-                <div class="sub">
-                    <a href="javascript:;">火车票</a>
-                    <a href="javascript:;">汽车票船票</a>
-                    <a href="javascript:;">国际机票</a>
-                    <a href="javascript:;">自驾专车</a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="pub"></div>
-                <div class="sub">
-                    <a href="javascript:;">攻略身边</a>
-                    <a href="javascript:;">邮轮</a>
-                    <a href="javascript:;">周末游</a>
-                    <a href="javascript:;">保险签证</a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="sub">
-                    <a href="javascript:;">门票玩乐</a>
-                    <a href="javascript:;">美食</a>
-                    <a href="javascript:;">全球购</a>
-                    <a href="javascript:;">礼品卡</a>
-                    <a href="javascript:;">出境WIFI</a>
-                    <a href="javascript:;">更多</a>
-                </div>
-            </div>
-        </nav>
-        <div class="extra">
-            <a href="#"><img src="images/extra_1.png" alt=""></a>
-            <a href="#"><img src="images/extra_2.png" alt=""></a>
-        </div>
-        <!--导航-->
-        <ul class="f-nav">
-            <li>我的</li>
-            <li>客户端</li>
-            <li>下载</li>
-        </ul>
-        <p>网站地图 | ENGLISH | 电脑版</p>
-        <p>©2015 携程旅行</p>
-    </div>
+    <form>
+        <fieldset>
+            <legend>表单type属性</legend>
+            <label>
+                用户名 <input type="text" />
+            </label>
+
+            <label>
+                email <input type="email" />
+            </label>
+
+            <label>
+                url <input type="url" />
+            </label>
+
+            <label>
+                number <input type="number" step="5" />
+            </label>
+
+            <label>
+                tel <input type="tel" />
+            </label>
+
+            <label>
+                search <input type="search" />
+            </label>
+
+            <label>
+                color <input type="color" />
+            </label>
+
+            <label>
+                range <input type="range" />
+            </label>
+
+            <label>
+                date <input type="date" />
+            </label>
+
+            <label>
+                time <input type="time" />
+            </label>
+
+            <label>
+                datetime <input type="datetime" />
+            </label>
+
+            <label>
+                month<input type="month" />
+            </label>
+
+            <label>
+                week <input type="week" />
+            </label>
+
+            <input type="submit" value="提交数据"/>
+        </fieldset>
+    </form>
 </body>
 </html>
