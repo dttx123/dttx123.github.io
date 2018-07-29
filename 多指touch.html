@@ -21,7 +21,7 @@
         h1 {
             background-color: green;
             text-align: center;
-            color: red;
+            color: yellow;
         }
     </style>
 </head>
@@ -44,7 +44,7 @@
             // console.log(e.targetTouches[0].clientX)
             document.querySelector('h1').innerHTML = e.targetTouches.length + '个脚指头！';
             for(var i = 0; i < e.targetTouches.length; i++) {
-                box.innerHTML += '手指' + (i +1) + '--> X:' + parseInt(e.targetTouches[0].clientX) + ' Y:' + parseInt(e.targetTouches[0].clientY) + '<br>';
+                box.innerHTML += '手指' + (i +1) + '--> X:' + parseInt(e.targetTouches[i].clientX) + ' Y:' + parseInt(e.targetTouches[i].clientY) + '<br>';
             }
             
         })
