@@ -37,7 +37,7 @@
             // box.innerHTML += '触屏移动！<br>';
             // console.log(e.targetTouches[0].clientX)
             for(var i = 0; i < e.targetTouches.length; i++) {
-                box.innerHTML += '手指' + (i +1) + '--> X:' + e.targetTouches[0].clientX + ' Y:' + e.targetTouches[0].clientY + '<br>';
+                box.innerHTML += '手指' + (i +1) + '--> X:' + parseInt(e.targetTouches[0].clientX) + ' Y:' + parseInt(e.targetTouches[0].clientY) + '<br>';
             }
             
         })
