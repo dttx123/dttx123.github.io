@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            perspective:  1499px;
+            perspective-origin: center 450px;
+            overflow: hidden;
+            background-color:  #f1f1f1;
+        }
+
+        .box {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            border: 1px solid red;
+            transform-style: preserve-3d;
+
+            transform: rotateX(0deg) rotateY(0deg);
+
+            animation: rot 40s linear infinite;
+        }
+        span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);             
+            width: 481px;
+            height: 1042px;
+            /* border: 1px solid red; */
+            background: url(./zjy1.jpg) no-repeat;
+            
+        }
+
+        @keyframes rot {
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <script>
+        var spans = document.querySelectorAll('span');
+        spans.forEach(function (v, i) {
+            v.style.transform = 'translate(-50%, -50%) rotateY(' + (i * 18) + 'deg) translateZ(1500px) ';
+            //perspective(1400px)
+            v.style.backgroundPosition =  -i * 481+'px 0px';
+        })
+    </script>
+</body>
+</html>
